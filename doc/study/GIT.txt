@@ -29,6 +29,10 @@ git commit -m 'svn commit message'
 --将本地版本库代码上传到远程git版本库中
 git push realname master
 
+
+--更新代码
+git pull realname master
+
 >>>以上操作如果不喜欢，可以使用git GUI方式操作
 
 
