@@ -1,0 +1,19 @@
+-- 建立本地项目版本库
+git init 
+
+--建立于远程git版本库的链接(git remote add origin url)
+git remote add realname git@github.com:xiaolinjava/chatrobot.git 
+
+--添加快照
+git add file/
+
+--提交代码到本地版本库
+git commit -m 'svn commit message'
+
+--将本地版本库代码上传到远程git版本库中
+git push realname master
+
+
+
+
+>>>> chatrobot git  url： git@github.com:xiaolinjava/chatrobot.git
