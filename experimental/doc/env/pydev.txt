@@ -1,0 +1,6 @@
+python的Eclipse插件地址：
+Eclipse python plug：http://pydev.org/updates
+
+
+webpy的环境配置：
+http://blog.csdn.net/yavobo/article/details/6240122
