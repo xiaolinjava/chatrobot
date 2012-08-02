@@ -6,10 +6,11 @@ Created on 2012-7-18
 @author: Administrator
 '''
 from django.http import HttpResponse, Http404
+from django.template import Template, Context
 
 import datetime
-from compiler.ast import For
 
+'''
 def index(request, offset=1):
     
     try:
@@ -31,62 +32,47 @@ def index(request, offset=1):
 
 
 def hello(request):
-    return HttpResponse("Hello world!")
+    now = datetime.datetime.now()
+    t = Template("""
+        <html>
+            <body>
+                <font style='color:red;'>
+                    hello world！！
+                </font>
+                It is now <font style='color:red;'>{{current_date}}</font>.
+            </body>
+        </html>
+        """)
+    html = t.render(Context({'current_date': now}))
+    return HttpResponse(html)
+
+
+'''
+from django.shortcuts import render_to_response
+
+
+#def index(request, offset=1):
+#    now = datetime.datetime.now()
+#    return render_to_response('index.html', {'current_date': now}) 
+def index(request, offset=1):
+    current_date = datetime.datetime.now()
+    return render_to_response('index.html', locals()) 
 
 
 
+from django.template.loader import get_template
+
+def hello(request):
+    now = datetime.datetime.now()
+    t = get_template('hello.html')
+    html = t.render(Context({'current_date': now}))
+    return HttpResponse(html)
 
 
+from django.db import  connection
 
-from django import template
-
-def youName(name):
-    
-    c = template.Context({'name': name})
-    t = template.Template('My name is {{name}}.')
-
-    return t.render(c)
-
-print(youName("xiaocilin"))
-
-
-from django.template import Context, Template
-
-def yourName(name):
-    c = Context({'name': name})
-    t = Template('My name is {{name}}.')
-    return t.render(c)
-
-print(yourName('xiaolin'))
-
-
-
-
-
-#Bad
-for name in ('John', 'Julie', 'Pat'):
-    t = Template('Hello, {{name}}')
-    print(t.render(Context({'name': name})))
-
-
-#Good
-t = Template('Hello, {{name}}')
-for name in ('John', 'Julie', 'Pat'):
-    print(t.render(Context({'name': name})))
-
-
-person = {'name': 'Sally', 'age': '25'}
-t = Template('{{person.name}} is {{person.age}} years old.')
-c = Context({'person': person})
-
-print(t.render(c))
-
-
-
-
-
-
-
+cursor = connection.cursor()
+print(cursor)
 
 
 

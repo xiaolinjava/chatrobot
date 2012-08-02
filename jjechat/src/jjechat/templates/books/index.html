@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}This is books page{% endblock %}
+
+{% block content %}
+<div>
+	<h2><a href="/books/add/">新增</a></h2>
+	<table border="1">
+		<tr>
+			<th>name</th>
+			<th>address</th>
+			<th>city</th>
+			<th>state_province</th>
+			<th>country</th>
+			<th>website</th>
+			<th>操作</th>
+		</tr>
+		{% for pl in publisher_list%}
+			<tr>
+				<td>{{pl.name}}</td>
+				<td>{{pl.address}}</td>
+				<td>{{pl.city}}</td>
+				<td>{{pl.state_province}}</td>
+				<td>{{pl.country}}</td>
+				<td>{{pl.website}}</td>
+				<td>
+					<a href="/books/edit/{{pl.id}}">修改</a>|<a href="/books/delete/{{pl.id}}">删除</a>
+				</td>
+			</tr>
+		{%endfor%}
+	</table>
+</div>
+{% endblock %}

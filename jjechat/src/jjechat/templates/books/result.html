@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}This is books operation result page{% endblock %}
+
+{% block content %}
+	{% if isSuccess %}
+		<h1 style="color:red;">删除操作成功！</h1>
+	{% else %}
+		<h1 style="color:red;">删除操作失败！</h1>
+	{% endif %}
+	
+	{% if isEdited %}
+		<h1 style="color:red;">修改操作成功！</h1>
+	{% else %}
+		<h1 style="color:red;">修改操作失败！</h1>
+	{% endif %}
+	<a href="/books/index">返回列表页</a>
+{% endblock %}
