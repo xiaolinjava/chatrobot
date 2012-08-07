@@ -6,7 +6,6 @@ from jjechat.books.models import Publisher
 from jjechat.books.forms import PublisherForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.template import RequestContext 
 
 
 def index(request):
@@ -14,13 +13,9 @@ def index(request):
     return render_to_response('books/index.html', {'publisher_list': publisher_list})
 
 def delete(request, id):
-    try:
-        Publisher.objects.get(id = id).delete()
-    except Publisher.DoesNotExist:
-        print("Apress isn't in the database yet.")
-        return render_to_response("books/result.html", {'isSuccess', False})
-   
-    return render_to_response('books/result.html', {'isSuccess': True})
+    publisher = get_object_or_404(Publisher, id=id)
+    publisher.delete()
+    return HttpResponseRedirect(reverse("index"))
 
 def add(request):
     if request.method=="POST":

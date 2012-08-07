@@ -2,7 +2,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-#from jjechat.ot.views import index
 from jjechat.books import views
 
 # Uncomment the next two lines to enable the admin:
@@ -11,16 +10,12 @@ from jjechat.books import views
 
 urlpatterns = patterns('',
     #project root default view
-    url('^$', 'jjechat.ot.views.index'),                   
-    #(r'^index/$', index),
-    url(r'^index/$', 'jjechat.ot.views.index', name="index"),
-    url(r'^index/(\d{1,2})/$', 'jjechat.ot.views.index', name="index"),
-    url(r'^hello/$', 'jjechat.ot.views.hello', name='hello'),    
+    url('^$', 'jjechat.books.views.index'),                   
+    url(r'^index/$', 'jjechat.books.views.index', name="index"),
+    url(r'^delete/(\d{1,10})/$', 'jjechat.books.views.delete', name="delete"),
+    url(r'^edit/(\d{1,10})/$', 'jjechat.books.views.edit', name="edit"),
+    url(r'^add/$', 'jjechat.books.views.add', name="add"),
     
-    (r'^books/index/$', views.index),               
-    (r'^books/delete/(\d{1,10})/$', views.delete), 
-    (r'^books/edit/(\d{1,10})/$', views.edit),
-    (r'^books/add/$', views.add),
     # Examples:
     # url(r'^$', 'jjechat.views.home', name='home'),
     # url(r'^jjechat/', include('jjechat.foo.urls')),

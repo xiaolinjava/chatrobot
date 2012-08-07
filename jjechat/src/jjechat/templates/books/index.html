@@ -4,7 +4,7 @@
 
 {% block content %}
 <div>
-	<h2><a href="/books/add/">新增</a></h2>
+	<h2><a href="/add/">新增</a></h2>
 	<table border="1">
 		<tr>
 			<th>name</th>
@@ -24,7 +24,7 @@
 				<td>{{pl.country}}</td>
 				<td>{{pl.website}}</td>
 				<td>
-					<a href="/books/edit/{{pl.id}}">修改</a>|<a href="/books/delete/{{pl.id}}">删除</a>
+					<a href="/edit/{{pl.id}}">修改</a>|<a href="/delete/{{pl.id}}">删除</a>
 				</td>
 			</tr>
 		{%endfor%}
