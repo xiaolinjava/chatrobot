@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^edit/(\d{1,10})/$', 'jjechat.books.views.edit', name="edit"),
     url(r'^add/$', 'jjechat.books.views.add', name="add"),
     
+    url(r'^qAnda/home/$', 'jjechat.qAnda.views.home', name="home"),
     # Examples:
     # url(r'^$', 'jjechat.views.home', name='home'),
     # url(r'^jjechat/', include('jjechat.foo.urls')),
