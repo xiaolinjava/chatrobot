@@ -3,9 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>{% block title %}{% endblock %}</title>
+ 	<!-- System Global CSS -->
+    <link rel="stylesheet" href="/static/styles/global.css" type="text/css" />
 </head>
-<body>
-	<h1>My helpful timestamp site</h1>
+<body class="test">
+	<h1>My chartRobot site</h1>
+	<script type="text/javascript" src="/static/scripts/jquery-1.7.2.min.js"></script>
 	{% block content %}{% endblock %}
 	
 	{% block footer%}

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}This is books page{% endblock %}
+{% block title %}This is books page {% endblock %}
 
 {% block content %}
 <div>
+
 	<h2><a href="/add/">新增</a></h2>
 	<table border="1">
 		<tr>
@@ -30,4 +31,12 @@
 		{%endfor%}
 	</table>
 </div>
+
+<script type="text/javascript">
+$(function() {
+// 	alert("abc");
+});
+</script>
+
 {% endblock %}
+

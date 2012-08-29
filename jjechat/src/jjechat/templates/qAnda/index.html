@@ -6,12 +6,30 @@
 <div>
 	<div align="center">
 		<p>
-			<textarea rows="10" cols="70"></textarea>
+			<textarea rows="10" cols="70" id="textareaId" readonly="readonly"></textarea>
 		</p>
 		<p>
-			<textarea rows="8" cols="50" name="question" style="width:370px; height: 60px;"></textarea>
-			<input type="submit" id="questionId" style="width:80px; height: 40px;" value="提问"/>
+			<textarea id="questionId" rows="8" cols="50" name="question" style="width:370px; height: 60px;"></textarea>
+			<input type="button" id="askAquestionId" style="width:80px; height: 40px;" value="提问"/>
 		</p>
 	</div>
 </div>
+<script type="text/javascript">
+$(function() {
+	var question = $("#questionId").val();
+	$("#askAquestionId").click(function() {
+		$.ajax({
+			type: "POST",
+			url : "/qAnda/talk",
+			data : {question:question},
+			success : function(data) {
+				var str = $("#textareaId").html();
+				str = str + data.result + "\r\n";
+				$("#textareaId").html(str);
+			}
+		});
+	});
+});
+</script>
+
 {% endblock %}

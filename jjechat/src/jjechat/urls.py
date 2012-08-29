@@ -1,5 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+#from django.conf import settings
+#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+#from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -11,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^add/$', 'jjechat.books.views.add', name="add"),
     
     url(r'^qAnda/home/$', 'jjechat.qAnda.views.home', name="home"),
+    url(r'^qAnda/talk$', 'jjechat.qAnda.views.talk', name="talk"),
     # Examples:
     # url(r'^$', 'jjechat.views.home', name='home'),
     # url(r'^jjechat/', include('jjechat.foo.urls')),
@@ -20,4 +26,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    
 )
+#urlpatterns += staticfiles_urlpatterns()
+#urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

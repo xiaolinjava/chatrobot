@@ -32,3 +32,12 @@ CREATE TABLE "books_book" (
 ;
 CREATE INDEX "books_book_22dd9c39" ON "books_book" ("publisher_id");
 COMMIT;
+
+BEGIN;
+CREATE TABLE "qAnda_qanda" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "question" varchar(100) NOT NULL,
+    "answer" varchar(100) NOT NULL
+)
+;
+COMMIT;

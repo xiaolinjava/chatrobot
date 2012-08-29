@@ -1,5 +1,6 @@
-#Sun Aug 12 14:03:26 GMT 2012
+#Wed Aug 22 20:21:18 CST 2012
 eclipse.preferences.version=1
 encoding//src/jjechat/books/tests.py=utf-8
 encoding//src/jjechat/templates/books/edit.html=UTF-8
 encoding//src/jjechat/templates/books/index.html=UTF-8
+encoding//src/jjechat/urls.py=utf-8
