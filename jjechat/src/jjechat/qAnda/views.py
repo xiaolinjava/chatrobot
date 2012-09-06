@@ -1,16 +1,36 @@
+#!/usr/bin/python
+# _*_ coding: utf-8 _*_
+
 from django.http import HttpResponse
 from django.shortcuts import render
-import json
 from django.views.decorators.csrf import csrf_exempt
+from jjechat.qAnda.models import QAndA
+import json
+
 
 def home(request):
     return render(request, 'qAnda/index.html')
 
 @csrf_exempt  
 def talk(request):
-    print request.POST['question']
-    response_data = {}
-    response_data['result'] = 'failed'
-    response_data['message'] = 'You messed up'
+    question=request.POST['question'].strip("\r\n")
+    sq=request.POST['sq'].strip("\r\n")
+    print "question :"+question
+    print "sq :"+sq
+    response_data = {}  
+    if sq:
+       QAndA(question=sq,answer=question).save()
+    else:     
+        try: 
+            qAndaList=QAndA.objects.filter(question=question)       
+            response_data['result'] = 'failed'
+            response_data['message'] = 'You must add one'
+            if qAndaList.__len__()!=0:        
+                response_data['result'] = "\r\nquestion :"+question+"\r\nanswer:"+qAndaList[0].answer
+                response_data['message'] = '' 
+            else :
+                response_data['result'] = '\r\nquestion:'+question
+        except  Exception,e:  
+            print e     
     return HttpResponse(json.dumps(response_data), mimetype="application/json") 
     

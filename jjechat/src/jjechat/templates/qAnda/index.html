@@ -11,21 +11,29 @@
 		<p>
 			<textarea id="questionId" rows="8" cols="50" name="question" style="width:370px; height: 60px;"></textarea>
 			<input type="button" id="askAquestionId" style="width:80px; height: 40px;" value="提问"/>
+			<input type="hidden" id="sq" />
 		</p>
 	</div>
 </div>
 <script type="text/javascript">
-$(function() {
-	var question = $("#questionId").val();
+$(function() {	
 	$("#askAquestionId").click(function() {
 		$.ajax({
 			type: "POST",
 			url : "/qAnda/talk",
-			data : {question:question},
-			success : function(data) {
-				var str = $("#textareaId").html();
-				str = str + data.result + "\r\n";
-				$("#textareaId").html(str);
+			data : {question:$("#questionId").val(),sq:$('#sq').val()},
+			success : function(data) {				
+				$('#sq').val('');
+				if(data.result!=undefined && data.result!=''){
+					var str = $("#textareaId").html();
+					str = str + data.result + "\r\n";
+					$("#textareaId").html(str);	
+					if(data.result.indexOf('answer:')<0){
+						$("#textareaId").html($("#textareaId").html()+'\r\ninfo:请在问题栏中提交答案');
+						$('#sq').val($("#questionId").val())										
+					}					
+				}	
+				$("#questionId").val('')	
 			}
 		});
 	});

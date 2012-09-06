@@ -62,6 +62,7 @@ for pl in publisher_filter_list :
 print("---------------select filter-------------")
 #select any query condition
 publisher_filter_list = Publisher.objects.filter(name="cilin.xiao", address='U.S').order_by('-name')
+
 for pl in publisher_filter_list :
     print(pl.name)
     
