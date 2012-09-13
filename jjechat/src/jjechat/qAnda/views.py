@@ -14,9 +14,7 @@ def home(request):
 @csrf_exempt  
 def talk(request):
     question=request.POST['question'].strip("\r\n")
-    sq=request.POST['sq'].strip("\r\n")
-    print "question :"+question
-    print "sq :"+sq
+    sq=request.POST['sq'].strip("\r\n")   
     response_data = {}  
     if sq:
        QAndA(question=sq,answer=question).save()
@@ -26,10 +24,10 @@ def talk(request):
             response_data['result'] = 'failed'
             response_data['message'] = 'You must add one'
             if qAndaList.__len__()!=0:        
-                response_data['result'] = "\r\nquestion :"+question+"\r\nanswer:"+qAndaList[0].answer
+                response_data['result'] = "\r\n我 :"+question+"\r\n小美:"+qAndaList[0].answer
                 response_data['message'] = '' 
             else :
-                response_data['result'] = '\r\nquestion:'+question
+                response_data['result'] = '\r\n我 :'+question
         except  Exception,e:  
             print e     
     return HttpResponse(json.dumps(response_data), mimetype="application/json") 

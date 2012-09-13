@@ -6,7 +6,7 @@
 <div>
 	<div align="center">
 		<p>
-			<textarea rows="10" cols="70" id="textareaId" readonly="readonly"></textarea>
+			<textarea rows="10" cols="70" id="textareaId" readonly="readonly" style="width: 458px; height: 300px;"></textarea>
 		</p>
 		<p>
 			<textarea id="questionId" rows="8" cols="50" name="question" style="width:370px; height: 60px;"></textarea>
@@ -17,27 +17,48 @@
 </div>
 <script type="text/javascript">
 $(function() {	
-	$("#askAquestionId").click(function() {
-		$.ajax({
-			type: "POST",
-			url : "/qAnda/talk",
-			data : {question:$("#questionId").val(),sq:$('#sq').val()},
-			success : function(data) {				
-				$('#sq').val('');
-				if(data.result!=undefined && data.result!=''){
-					var str = $("#textareaId").html();
-					str = str + data.result + "\r\n";
-					$("#textareaId").html(str);	
-					if(data.result.indexOf('answer:')<0){
-						$("#textareaId").html($("#textareaId").html()+'\r\ninfo:请在问题栏中提交答案');
-						$('#sq').val($("#questionId").val())										
-					}					
-				}	
-				$("#questionId").val('')	
-			}
-		});
+	$("#questionId").keydown(function(e) {
+		 var key = e.which;
+         if (key == 13) {
+        	send() ;
+         }		
 	});
+	$("#askAquestionId").click(send);
 });
+function  send(){
+	$.ajax({
+		type: "POST",
+		url : "/qAnda/talk",
+		data : {question:$("#questionId").val(),sq:$('#sq').val()},
+		success : function(data) {				
+			$('#sq').val('');
+			if(data.result!=undefined && data.result!=''){
+				var str = $("#textareaId").html();
+				str = str + data.result + "\r\n";
+				$("#textareaId").html(str);	
+				if(data.result.indexOf('小美:')<0){
+					$("#textareaId").html($("#textareaId").html()+'\r\n小美:我不知道(⊙o⊙)哦。。大哥哥。。。教教我:-O');
+					$('#sq').val($("#questionId").val())										
+				}	
+			}	
+			moveToLastLine($('#textareaId')[0]);
+			$("#questionId").val('');
+			$("#questionId").focus();
+		}
+	});
+}
+function   moveToLastLine(tan)     { 
+	if (navigator.userAgent.indexOf("MSIE")>0){
+		tan.focus();  		
+		var  o=tan.createTextRange();     
+		o.move("character",tan.value.length);    
+		o.select(); 
+	}else{
+		setTimeout(function() {
+			tan.setSelectionRange(0, tan.value.length+1);  //将光标定位在textarea的开头，需要定位到其他位置的请自行修改
+    }, 0);
+	}
+}    
 </script>
 
 {% endblock %}
